@@ -10,9 +10,20 @@ module RegisterFile (
 
 logic [15:0]Registers[64];
 
-always_ff @ (posedge Clock)
-	begin 
+always_ff @ (posedge Clock, posedge AddressA, posedge AddressB)
+begin
+	if(AddressA) begin
+		ReadDataA <= Registers[AddressA];
+	end
+	else if(AddressB) begin
+		ReadDataB <= Registers[AddressB];
+	end
+end
 
+always_comb
+begin
+	if(WriteEnable == 1) begin
+		Registers[AddressA] = WriteData;
 	end
 
 endmodule //RegisterFile
