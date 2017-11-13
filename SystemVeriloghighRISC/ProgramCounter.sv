@@ -10,11 +10,11 @@ module ProgramCounter
 
 	always_comb
 	begin
-		if (Reset)
+		if (Reset == 1)
 			CounterValue = '0;
-		else if (LoadEnable)
+		else if (LoadEnable == 1)
 			CounterValue = LoadValue;
-		else if (OffsetEnable)
+		else if (OffsetEnable == 1)
 			CounterValue = CounterValue + Offset;
 		else
 			CounterValue = CounterValue + 0'b1;
